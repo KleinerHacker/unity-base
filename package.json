@@ -1,0 +1,20 @@
+{
+  "name": "org.pcsoft.base",
+  "version": "1.0.0",
+  "displayName": "Unity Base",
+  "description": "Base for all Unity extensions",
+  "unity": "2021.3",
+  "keywords": [
+    "commons",
+    "extension",
+    "base"
+  ],
+  "dependencies": {
+    "org.pcsoft.common-ex": "1.1.10"
+  },
+  "author": {
+    "name": "Pfeiffer C Soft",
+    "email": "kl3in3rhack3r@gmail.com",
+    "url": "https://github.com/KleinerHacker/unity-base"
+  }
+}
