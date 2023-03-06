@@ -1,6 +1,6 @@
 {
   "name": "org.pcsoft.base",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "displayName": "Unity Base",
   "description": "Base for all Unity extensions",
   "unity": "2021.3",
