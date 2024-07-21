@@ -1,9 +1,8 @@
-using UnityBase.Runtime.@base.Scripts.Runtime.Components.Singleton.Attributes;
-using UnityBase.Runtime.@base.Scripts.Runtime.Components.Singleton.Internals;
-using UnityEngine;
+using UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components.Singleton.Attributes;
+using UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components.Singleton.Internals;
 using UnityEngine.EventSystems;
 
-namespace UnityBase.Runtime.@base.Scripts.Runtime.Components.Singleton
+namespace UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components.Singleton
 {
     /// <summary>
     /// Base class for a singleton UI behavior.

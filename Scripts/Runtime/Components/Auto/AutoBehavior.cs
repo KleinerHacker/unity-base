@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
-namespace UnityBase.Runtime.@base.Scripts.Runtime.Components.Auto
+namespace UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components.Auto
 {
     public abstract class AutoBehavior : MonoBehaviour
     {

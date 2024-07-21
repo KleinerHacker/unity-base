@@ -1,7 +1,7 @@
-﻿using UnityBase.Runtime.@base.Scripts.Runtime.Components;
+﻿using UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components;
 using UnityEngine;
 
-namespace UnityBase.Runtime.@base.Scripts.Runtime
+namespace UnityBase.Runtime.Projects.unity_base.Scripts.Runtime
 {
     public static class BehaviorSystem
     {

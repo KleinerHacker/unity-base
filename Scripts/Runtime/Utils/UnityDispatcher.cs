@@ -1,7 +1,7 @@
 using System;
-using UnityBase.Runtime.@base.Scripts.Runtime.Components;
+using UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components;
 
-namespace UnityBase.Runtime.@base.Scripts.Runtime.Utils
+namespace UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Utils
 {
     public static class UnityDispatcher
     {

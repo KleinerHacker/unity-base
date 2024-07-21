@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityBase.Runtime.@base.Scripts.Runtime.Types;
+using UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Types;
 using UnityEngine;
 
-namespace UnityBase.Runtime.@base.Scripts.Runtime.Utils.Extensions
+namespace UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Utils.Extensions
 {
     public static class GameObjectExtensions
     {

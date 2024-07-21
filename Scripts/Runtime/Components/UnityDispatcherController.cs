@@ -1,11 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityBase.Runtime.@base.Scripts.Runtime.Components.Singleton;
-using UnityBase.Runtime.@base.Scripts.Runtime.Components.Singleton.Attributes;
+using UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components.Singleton;
+using UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components.Singleton.Attributes;
 using UnityEngine;
 
-namespace UnityBase.Runtime.@base.Scripts.Runtime.Components
+namespace UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components
 {
     [Singleton(Scope = SingletonScope.Application, Instance = SingletonInstance.RequiresNewInstance, CreationTime = SingletonCreationTime.Loading, ObjectName = "Dispatcher")]
     internal sealed class UnityDispatcherController : SingletonBehavior<UnityDispatcherController>

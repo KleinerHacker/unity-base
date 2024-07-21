@@ -1,6 +1,6 @@
 using System;
 
-namespace UnityBase.Runtime.@base.Scripts.Runtime.Components.Singleton.Attributes
+namespace UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components.Singleton.Attributes
 {
     /// <summary>
     /// Represent the required attribute for <see cref="SingletonBehavior{T}"/> and <see cref="SingletonUIBehavior{T}"/>

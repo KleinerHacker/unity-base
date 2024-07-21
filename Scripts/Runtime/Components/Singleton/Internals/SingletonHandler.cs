@@ -1,8 +1,8 @@
-using UnityBase.Runtime.@base.Scripts.Runtime.Components.Singleton.Attributes;
+using UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components.Singleton.Attributes;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace UnityBase.Runtime.@base.Scripts.Runtime.Components.Singleton.Internals
+namespace UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components.Singleton.Internals
 {
     public static class SingletonHandler
     {

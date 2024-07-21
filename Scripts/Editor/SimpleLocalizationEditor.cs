@@ -2,9 +2,7 @@ using System.Linq;
 using UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Extras;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
-using UnityEngine.Localization.Tables;
 
 namespace UnityBase.Editor.Projects.unity_base.Scripts.Editor
 {

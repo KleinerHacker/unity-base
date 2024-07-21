@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using UnityBase.Runtime.@base.Scripts.Runtime.Components.Singleton.Attributes;
-using UnityCommonEx.Runtime.common_ex.Scripts.Runtime.Utils.Extensions;
+using UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components.Singleton.Attributes;
+using UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Utils.Extensions;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace UnityBase.Runtime.@base.Scripts.Runtime.Components.Singleton.Internals
+namespace UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components.Singleton.Internals
 {
     internal sealed class SingletonRegistry
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace UnityBase.Runtime.@base.Scripts.Runtime.Utils
+namespace UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Utils
 {
     public static class TextureUtils
     {
