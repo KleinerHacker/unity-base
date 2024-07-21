@@ -1,10 +1,14 @@
 {
-    "name": "UnityBase.Runtime",
-    "rootNamespace": "UnityBase.Runtime",
+    "name": "UnityBase.Editor",
+    "rootNamespace": "UnityBase.Editor",
     "references": [
-        "GUID:626cca1954403c942aaa892ce194af26"
+        "GUID:64c52e74a682df04189ccbd30b6ca5aa",
+        "GUID:2e77701fe0ceda44fb763f03ee704c37",
+        "GUID:eec0964c48f6f4e40bc3ec2257ccf8c5"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
