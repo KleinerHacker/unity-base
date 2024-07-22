@@ -9,9 +9,6 @@
     "extension",
     "base"
   ],
-  "dependencies": {
-    "org.pcsoft.common-ex": "1.1.12"
-  },
   "author": {
     "name": "Pfeiffer C Soft",
     "email": "kl3in3rhack3r@gmail.com",

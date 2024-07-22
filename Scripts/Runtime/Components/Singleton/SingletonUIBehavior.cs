@@ -1,5 +1,6 @@
 using UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components.Singleton.Attributes;
 using UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components.Singleton.Internals;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components.Singleton
