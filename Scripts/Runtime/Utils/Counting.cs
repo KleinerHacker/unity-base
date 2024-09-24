@@ -33,7 +33,7 @@ namespace UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Utils
             if (CheckCounter(_counter))
             {
                 action?.Invoke();
-                _counter = _autoReset ? ResetCounterValue : ZeroCounterValue;
+                _counter = _autoReset ? ResetCounterValue : MaxCounterValue;
 
                 return true;
             }
@@ -47,11 +47,24 @@ namespace UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Utils
         /// <param name="action">Action to run if counter reach limit</param>
         /// <returns>TRUE if action was run, otherwise FALSE</returns>
         public bool Try(Action action) => Try(1f, action);
+        
+        /// <summary>
+        /// Try to run given action. This is only called if counter reach limit. With each call of this method the counter is counting by one.
+        /// </summary>
+        /// <returns>TRUE if action was run, otherwise FALSE</returns>
+        public bool Try() => Try(1f, null);
+        
+        /// <summary>
+        /// Try to run given action. This is only called if counter reach limit. With each call of this method the counter is decrement by given value.
+        /// </summary>
+        /// <param name="value">Value to counting by</param>
+        /// <returns>TRUE if action was run, otherwise FALSE</returns>
+        public bool Try(float value) => Try(value, null);
 
         protected abstract float CalcCounter(float counter, float value);
         protected abstract bool CheckCounter(float counter);
         protected abstract float ResetCounterValue { get; }
-        protected abstract float ZeroCounterValue { get; }
+        protected abstract float MaxCounterValue { get; }
     }
 
     /// <summary>
@@ -74,7 +87,7 @@ namespace UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Utils
 
         protected override float ResetCounterValue => _max;
 
-        protected override float ZeroCounterValue => 0f;
+        protected override float MaxCounterValue => 0f;
     }
 
     /// <summary>
@@ -97,7 +110,7 @@ namespace UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Utils
 
         protected override float ResetCounterValue => 0f;
 
-        protected override float ZeroCounterValue => _max;
+        protected override float MaxCounterValue => _max;
     }
 
     public sealed class ActionCounting
