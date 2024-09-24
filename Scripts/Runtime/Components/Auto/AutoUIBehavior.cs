@@ -28,9 +28,9 @@ namespace UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components.Auto
                 .ToList();
         }
 
-        #region Builtin Methods
+        #region Caller Methods for Builtin Methods
 
-        protected override void Awake()
+        protected void InjectFieldsOnAwake()
         {
             foreach (var awakeField in awakeFields)
             {
@@ -38,7 +38,7 @@ namespace UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components.Auto
             }
         }
 
-        protected override void OnEnable()
+        protected void InjectFieldsOnEnable()
         {
             foreach (var enableField in enableFields)
             {
@@ -46,7 +46,7 @@ namespace UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components.Auto
             }
         }
 
-        protected override void Start()
+        protected void InjectFieldsOnStart()
         {
             foreach (var startField in startFields)
             {
