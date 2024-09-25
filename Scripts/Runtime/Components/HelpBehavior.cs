@@ -3,8 +3,8 @@ using UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components.Singleton
 
 namespace UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components
 {
-    [Singleton(Instance = SingletonInstance.RequiresNewInstance, Scope = SingletonScope.Application, CreationTime = SingletonCreationTime.Loading)]
-    internal sealed class HelpBehavior : SingletonBehavior<HelpBehavior>
+    [Singleton(ObjectName = "Help Behavior")]
+    public sealed class HelpBehavior : SingletonBehavior<HelpBehavior>
     {
     }
 }

@@ -1,70 +1,132 @@
 using System;
+using System.Linq;
+using System.Reflection;
 using UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components.Singleton.Attributes;
-using UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components.Singleton.Internals;
+using UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Utils.Extensions;
 using UnityEngine;
 
 namespace UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components.Singleton
 {
-    /// <summary>
-    /// Base class for a singleton behavior.
-    /// </summary>
-    /// <typeparam name="T">Must the final implementation type of itself</typeparam>
     public abstract class SingletonBehavior<T> : MonoBehaviour where T : SingletonBehavior<T>
     {
-        /// <summary>
-        /// Returns the singleton of this behavior. Can return <c>null</c> in case of <see cref="SingletonConditionAttribute"/> method returns FALSE. 
-        /// </summary>
-        public static T Singleton => SingletonHandler.Registry.GetSingleton<T>();
+        private static T instance;
+        private static object lockObject = new();
+        private static bool applicationIsQuitting = false;
+
+        public static T Instance
+        {
+            get
+            {
+                if (applicationIsQuitting)
+                {
+                    Debug.LogWarning("[Singleton] Instance '" + typeof(T) + "' already destroyed on application quit." +
+                                     " Won't create again - returning null.");
+                    return null;
+                }
+
+                lock (lockObject)
+                {
+                    //Instance already exists in cache?
+                    if (instance != null)
+                        return instance;
+
+                    //Try to find existing instance of object type
+                    instance = TryFindExistingInstance();
+
+                    //Exists instance in scene?
+                    if (instance != null)
+                    {
+#if SINGLETON_LOGGING
+                        Debug.Log("[Singleton] Find already existing instance of type " + typeof(T).FullName);
+#endif
+                        return instance;
+                    }
+
+                    //Create new instance
+                    instance = CreateNewInstance();
+                    return instance;
+                }
+            }
+        }
+
+        private static T TryFindExistingInstance()
+        {
+#if SINGLETON_LOGGING
+            Debug.Log("[Singleton] Try to find existing instance of type " + typeof(T).FullName + "...");
+#endif
+
+            var existingInstance = FindFirstObjectByType<T>();
+
+            if (FindObjectsByType<T>(FindObjectsSortMode.None).Length > 1)
+            {
+                Debug.LogWarning("[Singleton] Something went really wrong " +
+                                 " - there should never be more than 1 singleton!" +
+                                 " Reopenning the scene might fix it.");
+            }
+
+            return existingInstance;
+        }
+
+        private static T CreateNewInstance()
+        {
+#if SINGLETON_LOGGING
+            Debug.Log("[Singleton] Create new instance of type " + typeof(T).FullName + "...");
+#endif
+
+            var descriptionAttr = typeof(T).GetCustomAttribute<SingletonAttribute>(true);
+
+            var go = new GameObject(descriptionAttr.ObjectName + " (Singleton)");
+            if (!descriptionAttr.CanDestroy)
+            {
+#if SINGLETON_LOGGING
+                Debug.Log("[Singleton] Do not destroy type " + typeof(T).FullName + "!");
+#endif
+                DontDestroyOnLoad(go);
+            }
+
+            var newInstance = go.AddComponent<T>();
+#if SINGLETON_LOGGING
+            Debug.Log("[Singleton] Initialize type " + typeof(T).FullName + "...");
+#endif
+            newInstance.OnInitializeSingleton();
+
+            return newInstance;
+        }
 
         #region Builtin Methods
 
-        protected void Awake()
+        protected virtual void OnDestroy()
         {
-            var attribute = SingletonHandler.Registry.GetAttribute(GetType());
-            
 #if SINGLETON_LOGGING
-            Debug.Log("[SINGLETON] Try add instance to Singleton registry for " + GetType().FullName);
+            Debug.Log("[Singleton] Instance of type " + typeof(T).FullName + " obsolete, application is quitting...");
 #endif
-            if (!SingletonHandler.Registry.TryRegisterSingleton(this))
-            {
-#if SINGLETON_LOGGING
-                Debug.Log("[SINGLETON] Instance already in Singleton registry for " + GetType().FullName + ", destroy this instance");
-#endif
-
-                Destroy(this);
-                return;
-            }
-
-            if (attribute.Scope == SingletonScope.Application)
-            {
-#if SINGLETON_LOGGING
-                Debug.Log("[SINGLETON] Instance marked for application scope (" + nameof(DontDestroyOnLoad) + ") for " + typeof(T).FullName);
-#endif
-                DontDestroyOnLoad(this);
-            }
-            
-            DoAwake();
+            applicationIsQuitting = true;
         }
-        
-        protected virtual void DoAwake() {}
-
-        protected void OnDestroy()
-        {
-            var attribute = SingletonHandler.Registry.GetAttribute(GetType());
-
-            if (attribute.Scope == SingletonScope.Application)
-                throw new InvalidOperationException("Unable to destroy game object cause it is an application scoped singleton: " + gameObject.name);
-
-#if SINGLETON_LOGGING
-            Debug.Log("[SINGLETON] Try Singleton registry cleanup for " + typeof(T).FullName);
-#endif
-            SingletonHandler.Registry.TryUnregisterSingleton(this);
-            
-            DoDestroy();
-        }
-        
-        protected virtual void DoDestroy() {} 
 
         #endregion
+
+        protected virtual void OnInitializeSingleton()
+        {
+        }
+    }
+
+    internal static class SingletonCreator
+    {
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        public static void CreateInstanceImmediately()
+        {
+            var types = AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes())
+                .WhereHasAttribute<Type, SingletonAttribute>();
+
+            foreach (var type in types.Select(x => x.Item1))
+            {
+                if (!type.GetCustomAttribute<SingletonAttribute>(true).CreateImmediately)
+                    return;
+
+                type.GetProperty("Instance",
+                    BindingFlags.Static | BindingFlags.Public | BindingFlags.GetProperty |
+                    BindingFlags.FlattenHierarchy)!.GetValue(null);
+            }
+        }
     }
 }

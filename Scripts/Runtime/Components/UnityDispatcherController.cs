@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components
 {
-    [Singleton(Scope = SingletonScope.Application, Instance = SingletonInstance.RequiresNewInstance, CreationTime = SingletonCreationTime.Loading, ObjectName = "Dispatcher")]
+    [Singleton(ObjectName = "Dispatcher")]
     internal sealed class UnityDispatcherController : SingletonBehavior<UnityDispatcherController>
     {
         private readonly IList<Action> _runList = new List<Action>();
