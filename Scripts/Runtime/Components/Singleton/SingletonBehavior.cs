@@ -36,7 +36,7 @@ namespace UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components.Singl
                     //Exists instance in scene?
                     if (instance != null)
                     {
-#if SINGLETON_LOGGING
+#if PCSOFT_SINGLETON_LOGGING
                         Debug.Log("[Singleton] Find already existing instance of type " + typeof(T).FullName);
 #endif
                         return instance;
@@ -51,7 +51,7 @@ namespace UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components.Singl
 
         private static T TryFindExistingInstance()
         {
-#if SINGLETON_LOGGING
+#if PCSOFT_SINGLETON_LOGGING
             Debug.Log("[Singleton] Try to find existing instance of type " + typeof(T).FullName + "...");
 #endif
 
@@ -69,7 +69,7 @@ namespace UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components.Singl
 
         private static T CreateNewInstance()
         {
-#if SINGLETON_LOGGING
+#if PCSOFT_SINGLETON_LOGGING
             Debug.Log("[Singleton] Create new instance of type " + typeof(T).FullName + "...");
 #endif
 
@@ -78,14 +78,14 @@ namespace UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components.Singl
             var go = new GameObject(descriptionAttr.ObjectName + " (Singleton)");
             if (!descriptionAttr.CanDestroy)
             {
-#if SINGLETON_LOGGING
+#if PCSOFT_SINGLETON_LOGGING
                 Debug.Log("[Singleton] Do not destroy type " + typeof(T).FullName + "!");
 #endif
                 DontDestroyOnLoad(go);
             }
 
             var newInstance = go.AddComponent<T>();
-#if SINGLETON_LOGGING
+#if PCSOFT_SINGLETON_LOGGING
             Debug.Log("[Singleton] Initialize type " + typeof(T).FullName + "...");
 #endif
             newInstance.OnInitializeSingleton();
@@ -97,7 +97,7 @@ namespace UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components.Singl
 
         protected virtual void OnDestroy()
         {
-#if SINGLETON_LOGGING
+#if PCSOFT_SINGLETON_LOGGING
             Debug.Log("[Singleton] Instance of type " + typeof(T).FullName + " obsolete, application is quitting...");
 #endif
             applicationIsQuitting = true;
