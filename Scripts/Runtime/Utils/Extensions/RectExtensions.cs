@@ -42,11 +42,11 @@ namespace UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Utils.Extensions
         public static Rect ShiftHalfY(this Rect rect) => ShiftRelativeY(rect, 0.5f);
 
         public static Rect Position(this Rect rect, Vector2 position) =>
-            new Rect(position, rect.size);
+            new Rect(rect.position + position, rect.size);
 
-        public static Rect PositionX(this Rect rect, float x) => Position(rect, new Vector2(x, rect.y));
+        public static Rect PositionX(this Rect rect, float x) => Position(rect, new Vector2(x, 0f));
         
-        public static Rect PositionY(this Rect rect, float y) => Position(rect, new Vector2(rect.x, y));
+        public static Rect PositionY(this Rect rect, float y) => Position(rect, new Vector2(0f, y));
         
         public static Rect Size(this Rect rect, Vector2 size) => 
             new Rect(rect.position, size);
