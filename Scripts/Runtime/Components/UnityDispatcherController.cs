@@ -14,12 +14,12 @@ namespace UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components
 
         public void RunLater(Action action)
         {
-            AddAction(action, _runList);
+            AddAction(action);
         }
 
         public void RunLater(uint framesToWait, Action action)
         {
-            AddAction(() => StartCoroutine(Wait()), _runList);
+            AddAction(() => StartCoroutine(Wait()));
 
             IEnumerator Wait()
             {
@@ -34,7 +34,7 @@ namespace UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components
 
         public void RunLater(float secondsToWait, Action action)
         {
-            AddAction(() => StartCoroutine(Wait()), _runList);
+            AddAction(() => StartCoroutine(Wait()));
 
             IEnumerator Wait()
             {
@@ -47,29 +47,29 @@ namespace UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components
 
         private void LateUpdate()
         {
-            RunActions(_runList);
+            RunActions();
         }
 
         #endregion
 
-        private void AddAction(Action action, IList<Action> actions)
+        private void AddAction(Action action)
         {
-            lock (actions)
+            lock (this)
             {
-                actions.Add(action);
+                _runList.Add(action);
             }
         }
 
-        private void RunActions(IList<Action> actions)
+        private void RunActions()
         {
-            lock (actions)
+            lock (this)
             {
-                foreach (var action in actions)
+                foreach (var action in _runList)
                 {
                     action();
                 }
 
-                actions.Clear();
+                _runList.Clear();
             }
         }
     }
