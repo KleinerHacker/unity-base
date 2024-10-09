@@ -1,13 +1,13 @@
 using System;
-using UnityBase.Runtime.@base.Scripts.Runtime.Components;
+using UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components;
 
-namespace UnityBase.Runtime.@base.Scripts.Runtime.Utils
+namespace UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Utils
 {
     public static class UnityDispatcher
     {
         public static void RunLater(Action action)
         {
-            var controller = UnityDispatcherController.Singleton;
+            var controller = UnityDispatcherController.Instance;
             if (controller == null)
                 throw new InvalidOperationException("No dispatcher found in scene!");
 
@@ -16,7 +16,7 @@ namespace UnityBase.Runtime.@base.Scripts.Runtime.Utils
 
         public static void RunLater(uint framesToWait, Action action)
         {
-            var controller = UnityDispatcherController.Singleton;
+            var controller = UnityDispatcherController.Instance;
             if (controller == null)
                 throw new InvalidOperationException("No dispatcher found in scene!");
 
@@ -25,7 +25,7 @@ namespace UnityBase.Runtime.@base.Scripts.Runtime.Utils
 
         public static void RunLater(float secondsToWait, Action action)
         {
-            var controller = UnityDispatcherController.Singleton;
+            var controller = UnityDispatcherController.Instance;
             if (controller == null)
                 throw new InvalidOperationException("No dispatcher found in scene!");
 

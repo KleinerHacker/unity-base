@@ -1,25 +1,25 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityBase.Runtime.@base.Scripts.Runtime.Components.Singleton;
-using UnityBase.Runtime.@base.Scripts.Runtime.Components.Singleton.Attributes;
+using UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components.Singleton;
+using UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components.Singleton.Attributes;
 using UnityEngine;
 
-namespace UnityBase.Runtime.@base.Scripts.Runtime.Components
+namespace UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components
 {
-    [Singleton(Scope = SingletonScope.Application, Instance = SingletonInstance.RequiresNewInstance, CreationTime = SingletonCreationTime.Loading, ObjectName = "Dispatcher")]
+    [Singleton(ObjectName = "Dispatcher")]
     internal sealed class UnityDispatcherController : SingletonBehavior<UnityDispatcherController>
     {
         private readonly IList<Action> _runList = new List<Action>();
 
         public void RunLater(Action action)
         {
-            AddAction(action, _runList);
+            AddAction(action);
         }
 
         public void RunLater(uint framesToWait, Action action)
         {
-            AddAction(() => StartCoroutine(Wait()), _runList);
+            AddAction(() => StartCoroutine(Wait()));
 
             IEnumerator Wait()
             {
@@ -34,7 +34,7 @@ namespace UnityBase.Runtime.@base.Scripts.Runtime.Components
 
         public void RunLater(float secondsToWait, Action action)
         {
-            AddAction(() => StartCoroutine(Wait()), _runList);
+            AddAction(() => StartCoroutine(Wait()));
 
             IEnumerator Wait()
             {
@@ -47,29 +47,29 @@ namespace UnityBase.Runtime.@base.Scripts.Runtime.Components
 
         private void LateUpdate()
         {
-            RunActions(_runList);
+            RunActions();
         }
 
         #endregion
 
-        private void AddAction(Action action, IList<Action> actions)
+        private void AddAction(Action action)
         {
-            lock (actions)
+            lock (this)
             {
-                actions.Add(action);
+                _runList.Add(action);
             }
         }
 
-        private void RunActions(IList<Action> actions)
+        private void RunActions()
         {
-            lock (actions)
+            lock (this)
             {
-                foreach (var action in actions)
+                foreach (var action in _runList)
                 {
                     action();
                 }
 
-                actions.Clear();
+                _runList.Clear();
             }
         }
     }

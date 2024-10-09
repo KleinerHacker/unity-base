@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace UnityBase.Runtime.@base.Scripts.Runtime.Components.Auto
+namespace UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components.Auto
 {
     [AttributeUsage(AttributeTargets.Field)]
     public class InjectAttribute : PropertyAttribute

@@ -1,6 +1,6 @@
 using System;
 
-namespace UnityBase.Runtime.@base.Scripts.Runtime.Types
+namespace UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Types
 {
     [Flags]
     public enum TreeSearchDirection
