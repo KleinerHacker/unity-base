@@ -1,6 +1,6 @@
 {
   "name": "org.pcsoft.base",
-  "version": "1.0.2",
+  "version": "2.0.0-EA.01",
   "displayName": "Unity Base",
   "description": "Base for all Unity extensions",
   "unity": "2021.3",
@@ -9,9 +9,6 @@
     "extension",
     "base"
   ],
-  "dependencies": {
-    "org.pcsoft.common-ex": "1.1.12"
-  },
   "author": {
     "name": "Pfeiffer C Soft",
     "email": "kl3in3rhack3r@gmail.com",

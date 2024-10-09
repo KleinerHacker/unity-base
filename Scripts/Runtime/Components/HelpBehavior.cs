@@ -1,10 +1,10 @@
-﻿using UnityBase.Runtime.@base.Scripts.Runtime.Components.Singleton;
-using UnityBase.Runtime.@base.Scripts.Runtime.Components.Singleton.Attributes;
+﻿using UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components.Singleton;
+using UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components.Singleton.Attributes;
 
-namespace UnityBase.Runtime.@base.Scripts.Runtime.Components
+namespace UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components
 {
-    [Singleton(Instance = SingletonInstance.RequiresNewInstance, Scope = SingletonScope.Application, CreationTime = SingletonCreationTime.Loading)]
-    internal sealed class HelpBehavior : SingletonBehavior<HelpBehavior>
+    [Singleton(ObjectName = "Help Behavior")]
+    public sealed class HelpBehavior : SingletonBehavior<HelpBehavior>
     {
     }
 }

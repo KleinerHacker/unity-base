@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
-namespace UnityBase.Runtime.@base.Scripts.Runtime.Components.Auto
+namespace UnityBase.Runtime.Projects.unity_base.Scripts.Runtime.Components.Auto
 {
     public abstract class AutoBehavior : MonoBehaviour
     {
@@ -28,9 +28,9 @@ namespace UnityBase.Runtime.@base.Scripts.Runtime.Components.Auto
                 .ToList();
         }
 
-        #region Builtin Methods
+        #region Caller Methods for Builtin Methods
 
-        protected virtual void Awake()
+        protected void InjectFieldsOnAwake()
         {
             foreach (var awakeField in awakeFields)
             {
@@ -38,7 +38,7 @@ namespace UnityBase.Runtime.@base.Scripts.Runtime.Components.Auto
             }
         }
 
-        protected virtual void OnEnable()
+        protected void InjectFieldsOnEnable()
         {
             foreach (var enableField in enableFields)
             {
@@ -46,7 +46,7 @@ namespace UnityBase.Runtime.@base.Scripts.Runtime.Components.Auto
             }
         }
 
-        protected virtual void Start()
+        protected void InjectFieldsOnStart()
         {
             foreach (var startField in startFields)
             {
