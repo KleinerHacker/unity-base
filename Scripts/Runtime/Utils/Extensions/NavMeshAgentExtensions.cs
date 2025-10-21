@@ -1,13 +1,14 @@
-using UnityEngine;
 using UnityEngine.AI;
 
 namespace UnityExtension.Runtime.Projects.unity_extension.Scripts.Runtime.Utils.Extensions
 {
     public static class NavMeshAgentExtensions
     {
-        public static bool IsArrived(this NavMeshAgent agent, float tolerance)
+        public static bool IsArrived(this NavMeshAgent agent)
         {
-            return Mathf.Abs((agent.transform.position - agent.destination).magnitude) <= tolerance;
+            return !agent.pathPending && 
+                   agent.remainingDistance <= agent.stoppingDistance && 
+                   (!agent.hasPath || agent.velocity.sqrMagnitude == 0f);
         }
     }
 }
